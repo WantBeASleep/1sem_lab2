@@ -9,6 +9,11 @@ int main() {
     int N;
     scanf("%d%lf", &N, &x);
 
+    if (N <= 0){
+        printf("N cant be 0 \n");
+        return 0;
+    }
+
     for (int k=1; k<=N; k++){
         Newbody_Row = exponentiation(x, k) / factorial(k+1);
         if (k%2) Newbody_Row *= -1;
