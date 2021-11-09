@@ -2,14 +2,22 @@
 
 double exponentiation(double, int);
 double module(double);
-int factorial(int);
-void Output(int, double, double, double);
+// int factorial(int);
+void Output(int, double, double, double, int);
 
 int main() {
 
     double S_Row = 0, Newbody_Row = 0, Accuracy_Row, x;
     int k = 1;
+    int factorial = 2;
     scanf("%lf%lf", &Accuracy_Row, &x);
+
+    double tmp = Accuracy_Row;
+    int tmpC = 0;
+    while (tmp < 1){
+        tmp *= 10;
+        tmpC++;
+    }
 
     if (Accuracy_Row == 0){
         printf("Accuracy cant be 0");
@@ -19,12 +27,14 @@ int main() {
     if (Accuracy_Row < 0) Accuracy_Row *= -1;
 
     do {
-        Newbody_Row = exponentiation(x, k) / factorial(k+1);
-        if (k%2) Newbody_Row *= -1;
         S_Row += Newbody_Row;
-        Output(k, S_Row, Newbody_Row, Accuracy_Row);
+        Newbody_Row = exponentiation(x, k) / factorial;
+        if (k%2) Newbody_Row *= -1;
+        Output(k, S_Row, Newbody_Row, Accuracy_Row, tmpC);
         k++;
+        factorial *= k;
     } while (module(Newbody_Row) > Accuracy_Row);
+    
     return 0;
 }
 
@@ -41,15 +51,17 @@ double module(double Newbody_Row){
     return Newbody_Row;
 }
 
+/*
 int factorial(int k){
     if (k == 1) return 1;
     return k * factorial(k-1);
 }
+*/
 
-void Output(int k, double S_Row, double Newbody_Row, double Accuracy_Row){
+void Output(int k, double S_Row, double Newbody_Row, double Accuracy_Row, int tmpC){
     printf("~~~~~\n");
     printf("NewBody(%d) = %lf\n", k, Newbody_Row);
-    printf("Summ(%d) = %lf\n", k, S_Row);
+    printf("Summ(%d) = %.*lf\n", k-1, tmpC, S_Row);
     printf("Accuracy diffrence - %lf\n", module(Newbody_Row) - Accuracy_Row);
     printf("~~~~~\n");
     return;
