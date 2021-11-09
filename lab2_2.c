@@ -11,6 +11,11 @@ int main() {
     int k = 1;
     scanf("%lf%lf", &Accuracy_Row, &x);
 
+    if (Accuracy_Row == 0){
+        printf("Accuracy cant be 0");
+        return 0;
+    }
+
     if (Accuracy_Row < 0) Accuracy_Row *= -1;
 
     do {
